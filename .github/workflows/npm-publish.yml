@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rastreamento de Cartão</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      margin-top: 80px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 500px;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .status {
+      margin-top: 20px;
+      background: #e9f6ff;
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Rastreio de Cartão</h1>
+    <p>Digite seu código de rastreio abaixo:</p>
+    <input type="text" id="codigo" placeholder="Ex: CRD47TPuo89">
+    <button onclick="verificarRastreio()">Rastrear</button>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    const rastreios = {
+      'CRD47TPuo89': [
+        '09/06/2025 – Pedido coletado pela transportadora.',
+        '10/06/2025 – Em centro de distribuição de São Paulo.',
+        '11/06/2025 – Em rota de entrega.',
+        '12/06/2025 – Saiu para entrega no endereço informado.'
+      ],
+      'CRD99XXtest': [
+        '08/06/2025 – Pedido aprovado.',
+        '09/06/2025 – Cartão em produção.',
+        '10/06/2025 – Em transporte para sua região.'
+      ]
+    };
+
+    function verificarRastreio() {
+      const codigo = document.getElementById('codigo').value.trim();
+      const statusBox = document.getElementById('status');
+      if (rastreios[codigo]) {
+        statusBox.innerHTML = '<strong>Atualizações:</strong><br>' + rastreios[codigo].join('<br>');
+        statusBox.style.display = 'block';
+      } else {
+        statusBox.innerHTML = 'Código não encontrado. Verifique se digitou corretamente.';
+        statusBox.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
